@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lio Market | كتالوج المنتجات والروابط</title>
+  <!-- تحميل خط Cairo وخط Inter لدعم النصوص العربية والإنجليزية بوضوح -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- تحميل Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Cairo', 'Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              dark: '#0f1115',
+              card: '#181b22',
+              gold: '#d4af37',
+              goldSoft: '#f3e5ab',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* منع التمرير الأفقي غير المرغوب وتفعيل التمرير السلس */
+    html, body {
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    .glass-pill {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body class="bg-stone-100 text-stone-900 dark:bg-brand-dark dark:text-stone-100 min-h-screen antialiased selection:bg-amber-500/20 selection:text-amber-700 dark:selection:text-amber-300">
+
+  <!-- حاوية رئيسية متجاوبة مع الجوال والكمبيوتر -->
+  <div class="max-w-2xl mx-auto px-4 py-6 sm:py-8">
+
+    <!-- شريط التحكم العلوي: الهوية، تبديل المظهر، وإضافة منتج -->
+    <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-brand-card border border-stone-200 dark:border-stone-800 shadow-sm text-xs font-semibold text-stone-700 dark:text-stone-300">
+        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+        <span>Lio Market • كتالوج مباشر</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button
+          id="themeToggleBtn"
+          type="button"
+          aria-label="تبديل الوضع الليلي والنهاري"
+          class="p-2.5 rounded-xl bg-white dark:bg-brand-card border border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-200 hover:border-amber-500/50 transition shadow-sm"
+          title="تبديل الوضع الليلي / النهاري"
+        >
+          <svg id="sunIcon" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg id="moonIcon" class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <button
+          id="openAddModalBtn"
+          type="button"
+          class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-stone-900 dark:bg-amber-500 text-white dark:text-stone-950 font-bold text-xs sm:text-sm hover:opacity-95 active:scale-[0.99] transition shadow-sm"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+          <span>إضافة منتج</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- رأس الصفحة مع شعار Lio Market ومبدل الشعارات الثلاثة والرفع المخصص -->
+    <header class="rounded-3xl bg-white dark:bg-brand-card border border-stone-200/90 dark:border-stone-800 p-5 sm:p-6 shadow-sm text-center">
+      <div class="w-24 h-24 mx-auto rounded-2xl bg-black border-2 border-amber-500/50 overflow-hidden shadow-lg mb-3 flex items-center justify-center">
+        <img
+          id="brandLogoImg"
+          src="1000259505.jpg"
+          alt="شعار Lio Market"
+          class="w-full h-full object-cover transition duration-300"
+        />
+      </div>
+
+      <!-- مبدل الشعارات الثلاثة المرفوعة + اختيار ملف شعار من الجهاز -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-4" role="group" aria-label="اختيار شعار Lio Market">
+        <button
+          type="button"
+          data-logo-src="1000259505.jpg"
+          data-logo-label="الشعار 1"
+          class="logo-switcher-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500 text-stone-950 shadow-xs transition"
+        >
+          الشعار 1
+        </button>
+        <button
+          type="button"
+          data-logo-src="1000259504.jpg"
+          data-logo-label="الشعار 2"
+          class="logo-switcher-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:border-amber-500/50 border border-stone-200 dark:border-stone-700 transition"
+        >
+          الشعار 2
+        </button>
+        <button
+          type="button"
+          data-logo-src="1000259506.jpg"
+          data-logo-label="الشعار 3"
+          class="logo-switcher-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:border-amber-500/50 border border-stone-200 dark:border-stone-700 transition"
+        >
+          الشعار 3
+        </button>
+        <label
+          for="customLogoInput"
+          class="cursor-pointer px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 hover:bg-amber-500/25 border border-amber-500/30 transition"
+        >
+          رفع شعار مخصص
+        </label>
+        <input id="customLogoInput" type="file" accept="image/*" class="hidden" />
+      </div>
+
+      <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-stone-900 dark:text-white">
+        Lio Market
+      </h1>
+      <p class="mt-2 text-xs sm:text-sm text-stone-600 dark:text-stone-300 leading-relaxed max-w-md mx-auto">
+        صفحة الكتالوج الخاصة بمتجر <strong class="text-amber-600 dark:text-amber-400">Lio Market</strong>. أضف منتجاتك وروابطها وصورها المتعددة بسهولة واحفظها مباشرة على جهازك.
+      </p>
+
+      <!-- زر الانتقال المباشر إلى إنستغرام -->
+      <div class="mt-5 flex justify-center">
+        <a
+          href="https://www.instagram.com/li0_market/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full sm:w-auto min-w-[230px] flex items-center justify-center gap-2 py-3 px-5 rounded-2xl bg-stone-900 dark:bg-amber-500 hover:opacity-95 active:scale-[0.99] text-white dark:text-stone-950 font-extrabold text-xs sm:text-sm border border-amber-500/30 transition shadow-sm"
+        >
+          <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.8A3.95 3.95 0 003.8 7.75v8.5a3.95 3.95 0 003.95 3.95h8.5a3.95 3.95 0 003.95-3.95v-8.5a3.95 3.95 0 00-3.95-3.95h-8.5zm8.95 1.35a1.15 1.15 0 110 2.3 1.15 1.15 0 010-2.3zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.8a3.2 3.2 0 100 6.4 3.2 3.2 0 000-6.4z" />
+          </svg>
+          <span>إنستغرام @li0_market</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- فلاتر التصنيفات -->
+    <nav aria-label="تصنيفات المنتجات" class="mt-6 flex items-center gap-2 overflow-x-auto pb-1">
+      <button
+        type="button"
+        data-category="الكل"
+        class="category-tab shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-stone-900 dark:bg-amber-500 text-white dark:text-stone-950 shadow-sm transition"
+      >
+        الكل
+      </button>
+      <button
+        type="button"
+        data-category="أزياء وفساتين"
+        class="category-tab shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white dark:bg-brand-card text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-800 hover:border-amber-500/50 transition"
+      >
+        أزياء وفساتين
+      </button>
+      <button
+        type="button"
+        data-category="عروض مميزة"
+        class="category-tab shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white dark:bg-brand-card text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-800 hover:border-amber-500/50 transition"
+      >
+        عروض مميزة
+      </button>
+      <button
+        type="button"
+        data-category="مختارات عامة"
+        class="category-tab shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white dark:bg-brand-card text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-800 hover:border-amber-500/50 transition"
+      >
+        مختارات عامة
+      </button>
+    </nav>
+
+    <!-- شريط تنبيه الحالة داخل الصفحة (بديل آمن عن alert) -->
+    <div id="statusBanner" class="hidden mt-4 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-xs sm:text-sm font-semibold flex items-center justify-between gap-2">
+      <span id="statusBannerText"></span>
+      <button id="closeBannerBtn" type="button" class="text-xs underline opacity-80 hover:opacity-100 shrink-0">إغلاق</button>
+    </div>
+
+    <!-- شبكة عرض المنتجات -->
+    <main class="mt-5">
+      <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- يتم توليد البطاقات ديناميكياً عبر JavaScript -->
+      </div>
+
+      <!-- حالة الكتالوج الفارغ أو عدم وجود نتائج في التصنيف -->
+      <div id="emptyState" class="hidden mt-4 rounded-3xl bg-white dark:bg-brand-card border border-dashed border-stone-300 dark:border-stone-700 p-8 text-center shadow-xs">
+        <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+        </div>
+        <h2 id="emptyStateTitle" class="text-sm sm:text-base font-extrabold text-stone-800 dark:text-stone-100">الكتالوج فارغ حالياً</h2>
+        <p id="emptyStateDesc" class="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-1 max-w-sm mx-auto">
+          اضغط على زر "إضافة منتج" لإدخال اسم المنتج، التصنيف، الملاحظات، روابط الصور، ورابط المنتج الصحيح.
+        </p>
+        <button
+          id="emptyAddBtn"
+          type="button"
+          class="mt-4 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-stone-950 text-xs sm:text-sm font-extrabold transition shadow-xs"
+        >
+          <span>إضافة أول منتج الآن</span>
+        </button>
+      </div>
+    </main>
+
+    <!-- تذييل الصفحة -->
+    <footer class="mt-8 pb-6 text-center text-xs text-stone-500 dark:text-stone-400 space-y-2">
+      <div class="inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-2xl bg-white dark:bg-brand-card border border-stone-200 dark:border-stone-800 shadow-xs">
+        <img
+          id="footerLogoImg"
+          src="1000259505.jpg"
+          alt="شعار Lio Market"
+          class="w-6 h-6 rounded-lg object-cover border border-amber-500/40"
+        />
+        <span>كتالوج <strong class="text-stone-800 dark:text-stone-100">Lio Market</strong> • محفوظ محلياً على متصفحك</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- نافذة منبثقة لإضافة أو تعديل منتج -->
+  <div id="productModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/65 backdrop-blur-xs">
+    <div class="w-full max-w-md rounded-3xl bg-white dark:bg-brand-card border border-stone-200 dark:border-stone-800 shadow-2xl p-5 sm:p-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-stone-100 dark:border-stone-800 pb-3 mb-4">
+        <h2 id="modalTitle" class="text-lg font-extrabold text-stone-900 dark:text-white">إضافة منتج جديد</h2>
+        <button id="closeModalBtn" type="button" class="p-1.5 rounded-xl text-stone-500 hover:bg-stone-100 dark:hover:bg-stone-800 transition" aria-label="إغلاق النافذة">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <form id="productForm" class="space-y-4">
+        <input type="hidden" id="editProductId" />
+
+        <div>
+          <label for="prodTitle" class="block text-xs font-bold mb-1.5 text-stone-700 dark:text-stone-200">اسم المنتج</label>
+          <input
+            id="prodTitle"
+            type="text"
+            required
+            placeholder="مثال: فستان سهرة أنيق"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-sm focus:outline-none focus:border-amber-500"
+          />
+        </div>
+
+        <div>
+          <label for="prodCategory" class="block text-xs font-bold mb-1.5 text-stone-700 dark:text-stone-200">التصنيف</label>
+          <select
+            id="prodCategory"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-sm focus:outline-none focus:border-amber-500"
+          >
+            <option value="أزياء وفساتين">أزياء وفساتين</option>
+            <option value="عروض مميزة">عروض مميزة</option>
+            <option value="مختارات عامة">مختارات عامة</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="prodNotes" class="block text-xs font-bold mb-1.5 text-stone-700 dark:text-stone-200">وصف أو ملاحظات مختصرة (اختياري)</label>
+          <input
+            id="prodNotes"
+            type="text"
+            placeholder="مثال: تفاصيل الخامة أو المقاسات المتوفرة"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-sm focus:outline-none focus:border-amber-500"
+          />
+        </div>
+
+        <div>
+          <label for="prodImage" class="block text-xs font-bold mb-1.5 text-stone-700 dark:text-stone-200">روابط صور المنتج (رابط واحد أو عدة روابط مفصولة بفاصلة أو سطر جديد)</label>
+          <textarea
+            id="prodImage"
+            rows="3"
+            placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-xs sm:text-sm focus:outline-none focus:border-amber-500"
+            dir="ltr"
+          ></textarea>
+          <div class="mt-2.5 flex flex-wrap items-center justify-between gap-2">
+            <label
+              for="prodImageFiles"
+              class="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-800 dark:text-amber-300 border border-amber-500/30 text-xs font-bold transition"
+            >
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+              </svg>
+              <span>تحميل صور من الكمبيوتر</span>
+            </label>
+            <input id="prodImageFiles" type="file" accept="image/*" multiple class="hidden" />
+            <span id="uploadedImagesCount" class="text-[11px] font-semibold text-stone-500 dark:text-stone-400"></span>
+          </div>
+          <div id="modalImagesPreview" class="mt-2.5 flex flex-wrap gap-2"></div>
+        </div>
+
+        <div>
+          <label for="prodLink" class="block text-xs font-bold mb-1.5 text-stone-700 dark:text-stone-200">رابط المنتج المباشر</label>
+          <input
+            id="prodLink"
+            type="url"
+            required
+            placeholder="https://..."
+            class="w-full px-3.5 py-2.5 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 text-sm focus:outline-none focus:border-amber-500"
+            dir="ltr"
+          />
+        </div>
+
+        <div class="pt-2 flex items-center justify-between gap-2">
+          <button
+            id="deleteProductBtn"
+            type="button"
+            class="hidden px-3.5 py-2.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500/20 text-xs font-bold transition"
+          >
+            حذف المنتج
+          </button>
+
+          <div class="flex items-center gap-2 mr-auto">
+            <button
+              id="cancelModalBtn"
+              type="button"
+              class="px-4 py-2.5 rounded-xl bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 text-xs font-bold hover:opacity-90 transition"
+            >
+              إلغاء
+            </button>
+            <button
+              type="submit"
+              class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-stone-950 text-xs sm:text-sm font-extrabold shadow-sm transition"
+            >
+              حفظ المنتج
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // مفاتيح التخزين المحلي الموحدة لمتجر Lio Market
+      const STORAGE_KEYS = {
+        PRODUCTS: 'lio_market_catalog_clean_v1',
+        THEME: 'lio_market_theme_clean_v1',
+        LOGO: 'lio_market_logo_clean_v1'
+      };
+
+      const LOGOS = ['1000259505.jpg', '1000259504.jpg', '1000259506.jpg'];
+      const INSTAGRAM_URL = 'https://www.instagram.com/li0_market/';
+
+      // صورة بديلة SVG نقية كشعار احتياطي عند تعذر تحميل الصورة
+      const FALLBACK_LOGO_SVG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">' +
+        '<rect width="240" height="240" rx="36" fill="#0f1115"/>' +
+        '<circle cx="120" cy="102" r="54" fill="none" stroke="#d4af37" stroke-width="5"/>' +
+        '<text x="120" y="112" text-anchor="middle" fill="#d4af37" font-family="sans-serif" font-size="34" font-weight="bold">LIO</text>' +
+        '<text x="120" y="192" text-anchor="middle" fill="#f3e5ab" font-family="sans-serif" font-size="22" font-weight="bold">Lio Market</text>' +
+        '</svg>'
+      );
+
+      // صورة بديلة SVG للمنتجات عند تعذر تحميل رابط صورة المنتج
+      const FALLBACK_PRODUCT_SVG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750">' +
+        '<rect width="600" height="750" fill="#181b22"/>' +
+        '<rect x="40" y="40" width="520" height="670" rx="28" fill="none" stroke="#d4af37" stroke-opacity="0.35" stroke-width="3"/>' +
+        '<text x="300" y="365" text-anchor="middle" fill="#d4af37" font-family="sans-serif" font-size="36" font-weight="bold">Lio Market</text>' +
+        '<text x="300" y="410" text-anchor="middle" fill="#a8a29e" font-family="sans-serif" font-size="20">Product Image</text>' +
+        '</svg>'
+      );
+
+      // حالة التطبيق تبدأ بكتالوج فارغ ليضيف المستخدم منتجاته يدوياً
+      let products = [];
+      let activeCategory = 'الكل';
+      let activeLogo = LOGOS[0];
+
+      // عناصر الواجهة
+      const productsGrid = document.getElementById('productsGrid');
+      const emptyState = document.getElementById('emptyState');
+      const emptyStateTitle = document.getElementById('emptyStateTitle');
+      const emptyStateDesc = document.getElementById('emptyStateDesc');
+      const emptyAddBtn = document.getElementById('emptyAddBtn');
+      const categoryTabs = document.querySelectorAll('.category-tab');
+      const statusBanner = document.getElementById('statusBanner');
+      const statusBannerText = document.getElementById('statusBannerText');
+      const closeBannerBtn = document.getElementById('closeBannerBtn');
+
+      // عناصر الشعار ومبدل الشعارات
+      const brandLogoImg = document.getElementById('brandLogoImg');
+      const footerLogoImg = document.getElementById('footerLogoImg');
+      const logoSwitcherBtns = document.querySelectorAll('.logo-switcher-btn');
+      const customLogoInput = document.getElementById('customLogoInput');
+
+      // عناصر المودال الخاص بإضافة/تعديل منتج
+      const productModal = document.getElementById('productModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const productForm = document.getElementById('productForm');
+      const editProductId = document.getElementById('editProductId');
+      const prodTitle = document.getElementById('prodTitle');
+      const prodCategory = document.getElementById('prodCategory');
+      const prodNotes = document.getElementById('prodNotes');
+      const prodImage = document.getElementById('prodImage');
+      const prodImageFiles = document.getElementById('prodImageFiles');
+      const uploadedImagesCount = document.getElementById('uploadedImagesCount');
+      const modalImagesPreview = document.getElementById('modalImagesPreview');
+      const prodLink = document.getElementById('prodLink');
+      const deleteProductBtn = document.getElementById('deleteProductBtn');
+      const openAddModalBtn = document.getElementById('openAddModalBtn');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const cancelModalBtn = document.getElementById('cancelModalBtn');
+
+      // صور مرفوعة من الكمبيوتر بصيغة data URL داخل جلسة المودال الحالية
+      let draftUploadedDataUrls = [];
+
+      // عرض شريط التنبيه داخل الصفحة كبديل آمن عن alert
+      function showBanner(message) {
+        statusBannerText.textContent = message;
+        statusBanner.classList.remove('hidden');
+      }
+
+      // تطبيق الشعار المحدد على الهيدر والفوتر وحفظه في التخزين المحلي
+      function applyLogo(logoSrc) {
+        const chosen = (typeof logoSrc === 'string' && logoSrc.trim()) ? logoSrc.trim() : LOGOS[0];
+        activeLogo = chosen;
+
+        const updateImgElement = function (imgEl) {
+          if (!imgEl) return;
+          imgEl.onerror = function () {
+            imgEl.onerror = null;
+            imgEl.src = FALLBACK_LOGO_SVG;
+          };
+          imgEl.src = chosen;
+        };
+
+        updateImgElement(brandLogoImg);
+        updateImgElement(footerLogoImg);
+
+        logoSwitcherBtns.forEach(function (btn) {
+          const btnSrc = btn.getAttribute('data-logo-src');
+          const isSelected = btnSrc === chosen;
+          btn.className = isSelected
+            ? 'logo-switcher-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500 text-stone-950 shadow-xs transition'
+            : 'logo-switcher-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:border-amber-500/50 border border-stone-200 dark:border-stone-700 transition';
+        });
+
+        try {
+          localStorage.setItem(STORAGE_KEYS.LOGO, chosen);
+        } catch (err) {
+          // تجاهل أخطاء التخزين في البيئات المقيدة
+        }
+      }
+
+      // تحليل روابط الصور (يدعم سطراً جديداً أو فاصلة أو مصفوفة)
+      function parseImagesInput(input) {
+        if (Array.isArray(input)) {
+          return input.map(function (s) { return String(s || '').trim(); }).filter(Boolean);
+        }
+        return String(input || '')
+          .split(/[\n,]+/)
+          .map(function (s) { return s.trim(); })
+          .filter(Boolean);
+      }
+
+      // فصل روابط URL النصية عن صور data URL المحملة من الجهاز لتسهيل العرض والتعديل
+      function splitStoredImages(imagesList) {
+        const urls = [];
+        const dataUrls = [];
+        (imagesList || []).forEach(function (img) {
+          const val = String(img || '').trim();
+          if (!val) return;
+          if (/^data:image\//i.test(val)) {
+            dataUrls.push(val);
+          } else {
+            urls.push(val);
+          }
+        });
+        return { urls: urls, dataUrls: dataUrls };
+      }
+
+      // تحديث معاينة الصور المختارة (روابط + صور محملة من الكمبيوتر) داخل المودال
+      function renderModalImagesPreview() {
+        const urlList = parseImagesInput(prodImage.value);
+        const combined = urlList.concat(draftUploadedDataUrls);
+
+        if (draftUploadedDataUrls.length > 0) {
+          uploadedImagesCount.textContent = 'تم تحميل ' + draftUploadedDataUrls.length + ' صورة من الجهاز';
+        } else {
+          uploadedImagesCount.textContent = '';
+        }
+
+        modalImagesPreview.innerHTML = '';
+        if (combined.length === 0) return;
+
+        combined.forEach(function (src, idx) {
+          const isUploaded = idx >= urlList.length;
+          const uploadedIdx = idx - urlList.length;
+
+          const wrap = document.createElement('div');
+          wrap.className = 'relative w-14 h-16 rounded-xl overflow-hidden border border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-900 shrink-0';
+
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = 'معاينة صورة ' + (idx + 1);
+          img.className = 'w-full h-full object-cover object-top';
+          img.onerror = function () {
+            img.onerror = null;
+            img.src = FALLBACK_PRODUCT_SVG;
+          };
+          wrap.appendChild(img);
+
+          if (isUploaded) {
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.setAttribute('aria-label', 'إزالة الصورة المحملة');
+            removeBtn.className = 'absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-black/75 text-white text-[10px] font-bold flex items-center justify-center hover:bg-rose-600 transition';
+            removeBtn.textContent = '×';
+            removeBtn.addEventListener('click', function () {
+              draftUploadedDataUrls.splice(uploadedIdx, 1);
+              renderModalImagesPreview();
+            });
+            wrap.appendChild(removeBtn);
+          }
+
+          modalImagesPreview.appendChild(wrap);
+        });
+      }
+
+      // قراءة ملفات الصور المختارة من الكمبيوتر وتحويلها إلى data URLs
+      if (prodImageFiles) {
+        prodImageFiles.addEventListener('change', function (e) {
+          const files = Array.from((e.target && e.target.files) || []);
+          if (files.length === 0) return;
+
+          const readPromises = files.map(function (file) {
+            return new Promise(function (resolve) {
+              const reader = new FileReader();
+              reader.onload = function (ev) {
+                if (ev.target && typeof ev.target.result === 'string') {
+                  resolve(ev.target.result);
+                } else {
+                  resolve(null);
+                }
+              };
+              reader.onerror = function () {
+                resolve(null);
+              };
+              reader.readAsDataURL(file);
+            });
+          });
+
+          Promise.all(readPromises).then(function (results) {
+            const validDataUrls = results.filter(Boolean);
+            if (validDataUrls.length > 0) {
+              draftUploadedDataUrls = draftUploadedDataUrls.concat(validDataUrls);
+              renderModalImagesPreview();
+              showBanner('تمت إضافة ' + validDataUrls.length + ' صورة من جهازك للمعاينة والحفظ.');
+            }
+            prodImageFiles.value = '';
+          });
+        });
+      }
+
+      if (prodImage) {
+        prodImage.addEventListener('input', renderModalImagesPreview);
+      }
+
+      closeBannerBtn.addEventListener('click', function () {
+        statusBanner.classList.add('hidden');
+      });
+
+      // أحداث أزرار الشعارات الثلاثة
+      logoSwitcherBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const src = btn.getAttribute('data-logo-src');
+          const label = btn.getAttribute('data-logo-label') || 'الشعار';
+          applyLogo(src);
+          showBanner('تم تفعيل ' + label + ' لمتجر Lio Market.');
+        });
+      });
+
+      // حدث رفع شعار مخصص من الجهاز
+      if (customLogoInput) {
+        customLogoInput.addEventListener('change', function (e) {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = function (ev) {
+            if (ev.target && typeof ev.target.result === 'string') {
+              applyLogo(ev.target.result);
+              showBanner('تم تحميل الشعار المخصص لمتجر Lio Market.');
+            }
+          };
+          reader.onerror = function () {
+            showBanner('تعذر قراءة ملف الشعار المختار.');
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      // تهيئة الوضع الليلي / النهاري
+      function initTheme() {
+        try {
+          const savedTheme = localStorage.getItem(STORAGE_KEYS.THEME);
+          const isDark = savedTheme ? savedTheme === 'dark' : true;
+          document.documentElement.classList.toggle('dark', isDark);
+        } catch (err) {
+          document.documentElement.classList.add('dark');
+        }
+      }
+
+      themeToggleBtn.addEventListener('click', function () {
+        const isDarkNow = document.documentElement.classList.toggle('dark');
+        try {
+          localStorage.setItem(STORAGE_KEYS.THEME, isDarkNow ? 'dark' : 'light');
+        } catch (err) {
+          // تجاهل أخطاء التخزين في البيئات المقيدة
+        }
+      });
+
+      // تحميل الشعار والمنتجات المحفوظة من localStorage
+      function loadData() {
+        try {
+          const savedLogo = localStorage.getItem(STORAGE_KEYS.LOGO);
+          if (savedLogo) {
+            activeLogo = savedLogo;
+          }
+        } catch (err) {
+          activeLogo = LOGOS[0];
+        }
+        applyLogo(activeLogo);
+
+        try {
+          const rawProducts = localStorage.getItem(STORAGE_KEYS.PRODUCTS);
+          if (rawProducts) {
+            const parsed = JSON.parse(rawProducts);
+            if (Array.isArray(parsed)) {
+              products = parsed.map(function (item) {
+                const imgs = parseImagesInput(item.images || item.image || '');
+                const finalImgs = imgs.length > 0 ? imgs : [FALLBACK_PRODUCT_SVG];
+                const idx = typeof item.activeImageIndex === 'number' && item.activeImageIndex >= 0 && item.activeImageIndex < finalImgs.length
+                  ? item.activeImageIndex
+                  : 0;
+                return {
+                  id: item.id || ('prod-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6)),
+                  title: String(item.title || '').trim() || 'منتج Lio Market',
+                  category: String(item.category || '').trim() || 'أزياء وفساتين',
+                  notes: String(item.notes || '').trim(),
+                  images: finalImgs,
+                  activeImageIndex: idx,
+                  link: String(item.link || '').trim() || INSTAGRAM_URL
+                };
+              });
+            } else {
+              products = [];
+            }
+          } else {
+            products = [];
+          }
+        } catch (err) {
+          products = [];
+          showBanner('تعذر قراءة البيانات المحفوظة، تم فتح كتالوج Lio Market فارغاً وجاهزاً للإضافة.');
+        }
+      }
+
+      // حفظ المنتجات في localStorage
+      function saveProducts() {
+        try {
+          localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+        } catch (err) {
+          showBanner('تم تحديث العرض، لكن تعذر حفظ التعديلات محلياً في المتصفح.');
+        }
+      }
+
+      // تفادي حقن HTML في النصوص المدخلة
+      function escapeHtml(str) {
+        return String(str || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      // التحقق من أمان الرابط قبل وضعه في href
+      function sanitizeUrl(url) {
+        const trimmed = String(url || '').trim();
+        if (!trimmed) return INSTAGRAM_URL;
+        if (/^https?:\/\//i.test(trimmed)) return trimmed;
+        return 'https://' + trimmed;
+      }
+
+      // رسم بطاقات المنتجات حسب التصنيف النشط مع دعم معرض الصور المتعددة
+      function renderProducts() {
+        const filtered = activeCategory === 'الكل'
+          ? products
+          : products.filter(function (item) { return item.category === activeCategory; });
+
+        productsGrid.innerHTML = '';
+
+        if (filtered.length === 0) {
+          emptyState.classList.remove('hidden');
+          if (products.length === 0) {
+            emptyStateTitle.textContent = 'الكتالوج فارغ حالياً';
+            emptyStateDesc.textContent = 'اضغط على "إضافة منتج" لإدخال بيانات المنتج، روابط الصور المتعددة، ورابط المنتج المباشر.';
+          } else {
+            emptyStateTitle.textContent = 'لا توجد منتجات في تصنيف "' + activeCategory + '"';
+            emptyStateDesc.textContent = 'يمكنك إضافة منتج جديد في هذا التصنيف أو اختيار تصنيف "الكل".';
+          }
+          return;
+        }
+
+        emptyState.classList.add('hidden');
+
+        filtered.forEach(function (product) {
+          const imgs = Array.isArray(product.images) && product.images.length > 0
+            ? product.images
+            : [FALLBACK_PRODUCT_SVG];
+          const currentIdx = Math.min(Math.max(product.activeImageIndex || 0, 0), imgs.length - 1);
+          const currentImg = imgs[currentIdx];
+
+          const card = document.createElement('article');
+          card.className = 'group rounded-3xl bg-white dark:bg-brand-card border border-stone-200/90 dark:border-stone-800 hover:border-amber-500/40 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col';
+
+          const safeTitle = escapeHtml(product.title);
+          const safeCategory = escapeHtml(product.category);
+          const safeNotes = escapeHtml(product.notes || '');
+          const safeImg = escapeHtml(currentImg);
+          const safeProductLink = escapeHtml(sanitizeUrl(product.link));
+
+          // عناصر التحكم بالمعرض عند توفر أكثر من صورة للمنتج
+          const galleryControlsHtml = imgs.length > 1 ? `
+            <button
+              type="button"
+              data-gallery-id="${escapeHtml(product.id)}"
+              data-dir="prev"
+              aria-label="الصورة السابقة"
+              class="gallery-nav-btn glass-pill absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/65 hover:bg-black/85 text-amber-300 flex items-center justify-center border border-amber-500/30 transition"
+            >
+              ›
+            </button>
+            <button
+              type="button"
+              data-gallery-id="${escapeHtml(product.id)}"
+              data-dir="next"
+              aria-label="الصورة التالية"
+              class="gallery-nav-btn glass-pill absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/65 hover:bg-black/85 text-amber-300 flex items-center justify-center border border-amber-500/30 transition"
+            >
+              ‹
+            </button>
+            <div class="glass-pill absolute bottom-2.5 inset-x-2.5 px-2 py-1.5 rounded-2xl bg-black/65 border border-amber-500/20 flex items-center justify-center gap-1.5 overflow-x-auto">
+              ${imgs.map(function (thumbUrl, idx) {
+                const activeDot = idx === currentIdx;
+                return `
+                  <button
+                    type="button"
+                    data-gallery-id="${escapeHtml(product.id)}"
+                    data-img-index="${idx}"
+                    aria-label="عرض صورة ${idx + 1}"
+                    class="gallery-thumb-btn w-7 h-9 rounded-lg overflow-hidden border transition shrink-0 ${activeDot ? 'border-amber-400 ring-1 ring-amber-400 scale-105' : 'border-white/25 opacity-70 hover:opacity-100'}"
+                  >
+                    <img
+                      src="${escapeHtml(thumbUrl)}"
+                      alt="${safeTitle} - ${idx + 1}"
+                      onerror="this.onerror=null;this.src='${FALLBACK_PRODUCT_SVG}';"
+                      class="w-full h-full object-cover object-top"
+                    />
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          ` : '';
+
+          card.innerHTML = `
+            <div class="relative aspect-[4/5] w-full bg-stone-200 dark:bg-stone-900 overflow-hidden">
+              <img
+                src="${safeImg}"
+                alt="${safeTitle}"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='${FALLBACK_PRODUCT_SVG}';"
+                class="w-full h-full object-cover object-top group-hover:scale-[1.02] transition duration-300"
+              />
+              <span class="glass-pill absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/65 text-amber-300 border border-amber-500/25 text-[11px] font-semibold">
+                ${safeCategory}
+              </span>
+              <button
+                type="button"
+                data-edit-id="${escapeHtml(product.id)}"
+                class="edit-product-btn glass-pill absolute top-3 left-3 px-2.5 py-1 rounded-xl bg-white/90 dark:bg-stone-900/90 text-stone-800 dark:text-stone-100 hover:bg-amber-400 hover:text-stone-950 text-[11px] font-bold shadow-xs transition"
+              >
+                تعديل
+              </button>
+              ${galleryControlsHtml}
+            </div>
+
+            <div class="p-4 flex-1 flex flex-col justify-between gap-3">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-1">
+                  <span class="text-[11px] font-semibold text-stone-400">صورة ${currentIdx + 1} من ${imgs.length}</span>
+                </div>
+                <h2 class="text-sm sm:text-base font-bold text-stone-900 dark:text-white leading-snug line-clamp-2">
+                  ${safeTitle}
+                </h2>
+
+                ${safeNotes ? `<p class="mt-2 text-xs text-stone-500 dark:text-stone-400 leading-relaxed line-clamp-2">${safeNotes}</p>` : ''}
+              </div>
+
+              <div class="grid grid-cols-1 gap-2 pt-1">
+                <a
+                  href="${safeProductLink}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-full py-2.5 px-3 rounded-xl bg-stone-900 dark:bg-amber-500 hover:opacity-95 text-white dark:text-stone-950 text-xs sm:text-sm font-extrabold text-center transition shadow-xs"
+                >
+                  فتح رابط المنتج
+                </a>
+
+                <a
+                  href="${INSTAGRAM_URL}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-full py-2 px-2.5 rounded-xl bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-200 text-xs font-bold text-center transition"
+                >
+                  إنستغرام @li0_market
+                </a>
+              </div>
+            </div>
+          `;
+
+          productsGrid.appendChild(card);
+        });
+
+        // ربط أزرار التعديل على البطاقات
+        document.querySelectorAll('.edit-product-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            const id = btn.getAttribute('data-edit-id');
+            openEditModal(id);
+          });
+        });
+
+        // ربط أزرار التالي/السابق للمعرض داخل البطاقة
+        document.querySelectorAll('.gallery-nav-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            const id = btn.getAttribute('data-gallery-id');
+            const dir = btn.getAttribute('data-dir');
+            const prod = products.find(function (p) { return p.id === id; });
+            if (!prod || !Array.isArray(prod.images) || prod.images.length <= 1) return;
+            const len = prod.images.length;
+            const cur = prod.activeImageIndex || 0;
+            prod.activeImageIndex = dir === 'next' ? (cur + 1) % len : (cur - 1 + len) % len;
+            saveProducts();
+            renderProducts();
+          });
+        });
+
+        // ربط الصور المصغرة للتنقل المباشر بين صور المنتج
+        document.querySelectorAll('.gallery-thumb-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            const id = btn.getAttribute('data-gallery-id');
+            const idx = parseInt(btn.getAttribute('data-img-index') || '0', 10);
+            const prod = products.find(function (p) { return p.id === id; });
+            if (!prod || !Array.isArray(prod.images) || isNaN(idx)) return;
+            prod.activeImageIndex = Math.min(Math.max(idx, 0), prod.images.length - 1);
+            saveProducts();
+            renderProducts();
+          });
+        });
+      }
+
+      // تفعيل تبويبات التصنيفات
+      categoryTabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          activeCategory = tab.getAttribute('data-category') || 'الكل';
+
+          categoryTabs.forEach(function (t) {
+            const isSelected = t === tab;
+            t.className = isSelected
+              ? 'category-tab shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-stone-900 dark:bg-amber-500 text-white dark:text-stone-950 shadow-sm transition'
+              : 'category-tab shrink-0 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white dark:bg-brand-card text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-800 hover:border-amber-500/50 transition';
+          });
+
+          renderProducts();
+        });
+      });
+
+      // فتح مودال إضافة منتج جديد
+      function openAddModal() {
+        modalTitle.textContent = 'إضافة منتج جديد';
+        editProductId.value = '';
+        prodTitle.value = '';
+        prodCategory.value = activeCategory !== 'الكل' ? activeCategory : 'أزياء وفساتين';
+        prodNotes.value = '';
+        prodImage.value = '';
+        if (prodImageFiles) prodImageFiles.value = '';
+        draftUploadedDataUrls = [];
+        renderModalImagesPreview();
+        prodLink.value = '';
+        deleteProductBtn.classList.add('hidden');
+        productModal.classList.remove('hidden');
+        productModal.classList.add('flex');
+        prodTitle.focus();
+      }
+
+      // فتح مودال تعديل منتج موجود
+      function openEditModal(id) {
+        const found = products.find(function (p) { return p.id === id; });
+        if (!found) return;
+
+        const splitImgs = splitStoredImages(found.images || []);
+        modalTitle.textContent = 'تعديل بيانات المنتج';
+        editProductId.value = found.id;
+        prodTitle.value = found.title;
+        prodCategory.value = found.category;
+        prodNotes.value = found.notes || '';
+        prodImage.value = splitImgs.urls.join('\n');
+        if (prodImageFiles) prodImageFiles.value = '';
+        draftUploadedDataUrls = splitImgs.dataUrls.slice();
+        renderModalImagesPreview();
+        prodLink.value = found.link || '';
+        deleteProductBtn.classList.remove('hidden');
+        productModal.classList.remove('hidden');
+        productModal.classList.add('flex');
+        prodTitle.focus();
+      }
+
+      function closeProductModal() {
+        productModal.classList.add('hidden');
+        productModal.classList.remove('flex');
+      }
+
+      openAddModalBtn.addEventListener('click', openAddModal);
+      emptyAddBtn.addEventListener('click', openAddModal);
+      closeModalBtn.addEventListener('click', closeProductModal);
+      cancelModalBtn.addEventListener('click', closeProductModal);
+
+      productModal.addEventListener('click', function (e) {
+        if (e.target === productModal) {
+          closeProductModal();
+        }
+      });
+
+      // حفظ المنتج (إضافة جديد أو تحديث منتج قائم)
+      productForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const titleVal = prodTitle.value.trim();
+        const categoryVal = prodCategory.value;
+        const notesVal = prodNotes.value.trim();
+        const urlImages = parseImagesInput(prodImage.value);
+        const imagesList = urlImages.concat(draftUploadedDataUrls);
+        const linkVal = sanitizeUrl(prodLink.value);
+
+        if (!titleVal || imagesList.length === 0) {
+          showBanner('يرجى إدخال اسم المنتج أو إضافة صورة عبر رابط أو تحميل من الكمبيوتر.');
+          return;
+        }
+
+        const existingId = editProductId.value;
+        if (existingId) {
+          products = products.map(function (item) {
+            if (item.id === existingId) {
+              return {
+                id: item.id,
+                title: titleVal,
+                category: categoryVal,
+                notes: notesVal,
+                images: imagesList,
+                activeImageIndex: 0,
+                link: linkVal
+              };
+            }
+            return item;
+          });
+          showBanner('تم تحديث بيانات المنتج بنجاح.');
+        } else {
+          const newProd = {
+            id: 'prod-' + Date.now(),
+            title: titleVal,
+            category: categoryVal,
+            notes: notesVal,
+            images: imagesList,
+            activeImageIndex: 0,
+            link: linkVal
+          };
+          products.unshift(newProd);
+          showBanner('تمت إضافة المنتج إلى كتالوج Lio Market.');
+        }
+
+        saveProducts();
+        renderProducts();
+        closeProductModal();
+      });
+
+      // حذف المنتج المحدد
+      deleteProductBtn.addEventListener('click', function () {
+        const id = editProductId.value;
+        if (!id) return;
+        products = products.filter(function (item) { return item.id !== id; });
+        saveProducts();
+        renderProducts();
+        closeProductModal();
+        showBanner('تم حذف المنتج من الكتالوج.');
+      });
+
+      // بدء تشغيل التطبيق
+      initTheme();
+      loadData();
+      renderProducts();
+    })();
+  </script>
+</body>
+</html>
